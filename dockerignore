@@ -1,0 +1,19 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.docker
+
+# Python
+payment_service/__pycache__/
+payment_service/*/__pycache__/
+payment_service/*/*/__pycache__/
+payment_service/*/*/*/__pycache__/
+.venv/
+venv/
+
+# Local PostgreSQL data
+db/
+
+.env.dev

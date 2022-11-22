@@ -1,0 +1,16 @@
+<html lang="ru">
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <title>Покупка {{ item.name }}</title>
+        <script src="https://js.stripe.com/v3/"></script>
+    </head>
+    <body>
+        <h3>{{ item.name }}</h3>
+        <p>Описание {{ item.name }}</p>
+        <p>{{ item.description }}</p>
+        <p>Цена: {{ item.price }} руб.</p>
+        <button id="buy-button" itemid="{{ item.pk }}">Buy</button>
+    </body>
+</html>
+<script type="text/javascript" src={% static "app_payment/js/payment.js" %}></script>
