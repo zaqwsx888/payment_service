@@ -34,8 +34,8 @@ class BuyView(View):
                     'quantity': 1,
                 }],
                 mode='payment',
-                success_url=request.META['HTTP_REFERER'],
-                cancel_url=request.META['HTTP_REFERER'],
+                success_url='http://151.248.126.46/buy/1',
+                cancel_url='http://151.248.126.46/buy/1',
             )
             return JsonResponse({'sessionId': session.id})
         except (ObjectDoesNotExist, InvalidRequestError, ) as error:
