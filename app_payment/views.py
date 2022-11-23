@@ -8,7 +8,7 @@ from django.views.generic import DetailView
 from app_payment.models import Item
 from stripe.error import InvalidRequestError
 
-stripe.api_key = os.environ.get('STRIPE_API_KEY')
+stripe.api_key = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc' # os.environ.get('STRIPE_API_KEY')
 
 
 class ItemDetailView(DetailView):
@@ -41,5 +41,5 @@ class BuyView(View):
                 cancel_url=absolute_url,
             )
             return JsonResponse({'sessionId': session.id})
-        except (ObjectDoesNotExist, InvalidRequestError, ) as error:
+        except (ObjectDoesNotExist, InvalidRequestError, Exception) as error:
             return JsonResponse({'error': str(error)})
