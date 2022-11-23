@@ -23,7 +23,6 @@ class BuyView(View):
     """Представление для получения Stripe session id"""
     def get(self, request, *args, **kwargs):
         item_pk = self.kwargs.get('item_pk')
-        print(stripe.api_key)
         try:
             item = Item.objects.get(pk=item_pk)
             path = reverse_lazy('item', kwargs={'item_pk': item_pk})
