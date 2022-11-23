@@ -2,6 +2,7 @@ import os
 import stripe
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView
 from app_payment.models import Item
@@ -24,6 +25,8 @@ class BuyView(View):
         item_pk = self.kwargs.get('item_pk')
         try:
             item = Item.objects.get(pk=item_pk)
+            path = reverse_lazy('item', kwargs={'item_pk': item_pk})
+            absolute_url = request.build_absolute_uri(path)
             session = stripe.checkout.Session.create(
                 line_items=[{
                     'price_data': {
@@ -34,8 +37,8 @@ class BuyView(View):
                     'quantity': 1,
                 }],
                 mode='payment',
-                success_url='http://151.248.126.46/buy/1',
-                cancel_url='http://151.248.126.46/buy/1',
+                success_url=absolute_url,
+                cancel_url=absolute_url,
             )
             return JsonResponse({'sessionId': session.id})
         except (ObjectDoesNotExist, InvalidRequestError, ) as error:
